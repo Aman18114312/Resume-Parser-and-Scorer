@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles1.css">
+    <title>Resume Similarity Checker</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Similarity Checker</h1>
+        <div class="upload-section">
+            <form method="post" enctype="multipart/form-data" action="/parse">
+                <label for="resume-upload">Upload Resume (PDF or DOCX):</label>
+                <input type="file" name="resume" id="resume-upload" accept=".pdf, .docx" required>
+                
+                <!-- Display the uploaded file name -->
+                {% if resume %}
+                    <p class="uploaded-file">Uploaded Resume: {{ resume.filename }}</p>
+                {% endif %}
+
+                <div class="job-description-section">
+                    <label for="job-description">Job Description:</label>
+                    <textarea name="job_description" id="job-description" rows="4" placeholder="Enter job description..." required></textarea>
+                </div>
+                <button type="submit">Check Score</button>
+            </form>
+        </div>
+        
+        {% if score is defined %}
+        <div class="result-section">
+            <p>Score: {{ score }}</p>
+            <!-- Placeholder for extracted name -->
+            <p>Name: {{ extracted_name }}</p>
+            <!-- Placeholder for extracted email -->
+            <p>Email: {{ extracted_email }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
